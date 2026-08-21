@@ -14,10 +14,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Cancel old runs if you push again
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
 
     steps:
       - name: Checkout Repository
@@ -28,28 +24,22 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.3' # or put '3.24.5' for latest
+          flutter-version: '3.19.6'
           channel: 'stable'
-          cache: true
+          cache: false
 
-      - name: Verify Flutter Environment
-        run: flutter doctor -v
-
-      - name: Install Dependencies
+      - name: Get Dependencies
         run: flutter pub get
 
       - name: Build Release APK
-        run: flutter build apk --release --split-per-abi
+        run: flutter build apk --release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: jaguar-orb-agent-release
           path: build/app/outputs/flutter-apk/app-release.apk
-          # or use app-*-release.apk if you use --split-per-abi
-          # path: build/app/outputs/flutter-apk/app-*-release.apk
