@@ -8,7 +8,7 @@ def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
  localPropertiesFile.withReader('UTF-8') { reader ->
-  localProperties.load(reader)
+ localProperties.load(reader)
  }
 }
 
@@ -25,31 +25,31 @@ if (flutterVersionName == null) {
 android {
  namespace "com.example.jaguar_orb_agent"
  compileSdk 34
- ndkVersion flutter.ndkVersion
+ ndkVersion "25.1.8937393"
 
  compileOptions {
-  sourceCompatibility JavaVersion.VERSION_17
-  targetCompatibility JavaVersion.VERSION_17
+ sourceCompatibility JavaVersion.VERSION_17
+ targetCompatibility JavaVersion.VERSION_17
  }
 
  kotlinOptions {
-  jvmTarget = '17'
+ jvmTarget = '17'
  }
 
  defaultConfig {
-  applicationId "com.example.jaguar_orb_agent"
-  minSdk 21
-  targetSdk 34
-  versionCode flutterVersionCode.toInteger()
-  versionName flutterVersionName
+ applicationId "com.example.jaguar_orb_agent"
+ minSdk 21
+ targetSdk 34
+ versionCode flutterVersionCode.toInteger()
+ versionName flutterVersionName
  }
 
  buildTypes {
-  release {
-   signingConfig signingConfigs.debug
-   minifyEnabled false
-   shrinkResources false
-  }
+ release {
+  signingConfig signingConfigs.debug
+  minifyEnabled false
+  shrinkResources false
+ }
  }
 }
 
